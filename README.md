@@ -2,4 +2,4 @@
 
 ## [Project: Embedded Input Reader]()
 
-__Acquired familiarity with:__ Wokwi, Raspberry Pi Pico.
+__Acquired familiarity with:__ Wokwi, MicroPython, Raspberry Pi Pico.
