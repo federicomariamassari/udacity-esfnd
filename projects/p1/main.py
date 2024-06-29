@@ -11,10 +11,10 @@ LED_GPIO_START = 7
 last_button_time_stamp = 0
 key_presses = []
 
-is_inactive = False
 
 def pin_id(pin):
     return int(str(pin)[8:10].rstrip(","))
+
 
 ## Pin interrupt handler
 #
@@ -32,19 +32,15 @@ def interrupt_callback(pin):
         key_presses.append(pin)
         print(f'key press: {pin_id(pin) - BUTTON_START_ID}')
 
+
 def clear_key_presses_if_inactive():
     global key_presses
     global last_button_time_stamp
-    global is_inactive
 
-    # FIXME: If no button is pressed, this should not print message at the beginning
-    if time.ticks_ms() - last_button_time_stamp > 3000:
-        if not is_inactive:
-            key_presses = []
-            print('key press sequence was cleared due to inactivity')
-        is_inactive = True
-    else:
-        is_inactive = False
+    if len(key_presses) != 0 and time.ticks_ms() - last_button_time_stamp > 3000:
+        key_presses = []
+        print('key press sequence was cleared due to inactivity')
+
 
 def main():
     global key_presses
