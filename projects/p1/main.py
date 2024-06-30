@@ -6,6 +6,7 @@ Date: 2024-06-30
 Resources:
 - Course 3: Combination Gates and Multiplexers
   [1] Building a MUX from Gates, Lesson 11: 4-to-1 MUX Chaining Implementation
+
 - Course 4: Connecting and Programming Embedded Systems
   [2] Synchronous and Asynchronous Processing, Lesson 10: Implement Complex Circuit on Breadboard
   [3] Synchronous and Asynchronous Processing, Lesson 12: Add LED Toggle
