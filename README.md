@@ -9,3 +9,9 @@
 ## [Project: Embedded Input Reader]()
 
 __Acquired familiarity with:__ Wokwi, MicroPython, Raspberry Pi Pico.
+
+### Overview
+
+### Output
+
+![Embedded Input Reader Output](./projects/p1/img/mov0.gif)
