@@ -2,6 +2,7 @@
 Title: Embedded Input Reader Project, Udacity Embedded Systems Fundamentals Nanodegree
 Author: Federico M. Massari
 Date: 2024-06-30
+Wokwi: https://wokwi.com/projects/402048833643264001
 
 Resources:
 
