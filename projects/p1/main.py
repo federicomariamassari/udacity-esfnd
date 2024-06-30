@@ -139,8 +139,8 @@ def main():
                           f'valid range: 0-{len(out_pins) - 1}, doing nothing')
             
             else:
-                print('wrong passcode')
-            print('')
+                print('wrong passcode', '\n')
+
             key_presses = key_presses[PASSCODE_LENGTH:]
 
         clear_key_presses_if_inactive()
