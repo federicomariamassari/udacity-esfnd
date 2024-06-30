@@ -55,7 +55,7 @@ def interrupt_callback(pin):
     button_press_delta = cur_button_ts - last_button_time_stamp
 
     # Handle debouncing
-    if button_press_delta > 200:
+    if button_press_delta > 200:  # ms
         last_button_time_stamp = cur_button_ts
         key_presses.append(pin)
 
