@@ -4,13 +4,13 @@ Author: Federico M. Massari
 Date: 2024-06-30
 
 Resources:
-- [1] Lesson 11: 4-to-1 MUX Chaining Implementation, Building a MUX from Gates, Course 3: Combination Gates and 
-        Multiplexers
-- [2] Lesson 12: Implement a Circuit, Breadboarding, Course 4: Connecting and Programming Embedded Systems
-- [3] Lesson 10: Implement Complex Circuit on Breadboard, Synchronous and Asynchronous Processing, Course 4: 
-        Connecting and Programming Embedded Systems
-- [4] Lesson 12: Add LED ToggleSynchronous and Asynchronous Processing, Course 4: Connecting and Programming 
-        Embedded Systems
+
+Course 3: Combination Gates and Multiplexers
+- [1] Building a MUX from Gates, Lesson 11: 4-to-1 MUX Chaining Implementation
+
+Course 4: Connecting and Programming Embedded Systems
+- [2] Synchronous and Asynchronous Processing, Lesson 10: Implement Complex Circuit on Breadboard
+- [3] Synchronous and Asynchronous Processing, Lesson 12: Add LED Toggle
 """
 
 import machine
@@ -30,7 +30,7 @@ MAX_IDLE_TIME_MS = 3000  # To clear incomplete button sequence after 3 seconds o
 
 
 def pin_id(pin):
-    """Extract pin number from MicroPython's machine.Pin value format.
+    """Extract pin number from MicroPython's machine.Pin value format. [2]
 
     :param pin: machine.Pin type parameter
 
@@ -41,12 +41,12 @@ def pin_id(pin):
 
 
 def interrupt_callback(pin):
-    """Pin interrupt handler callback function.
+    """Pin interrupt handler callback function. [2]
 
     :param pin: machine.Pin type parameter
 
     Resources:
-    [1] - https://docs.micropython.org/en/latest/library/machine.Pin.html#machine.Pin.irq
+    - https://docs.micropython.org/en/latest/library/machine.Pin.html#machine.Pin.irq
     """
     global last_button_time_stamp
 
@@ -101,7 +101,7 @@ def main():
     for out_id in range(0, LED_COUNT):
         out_pins.append(machine.Pin(LED_GPIO_START + out_id, machine.Pin.OUT))
 
-    prev_binary_code = -1  # Init
+    prev_binary_code = -1  # Init [1]
     while True:
         binary_code = 0
         for selector_val in range(INPUT_COUNT):  # Scan each mux
@@ -114,7 +114,7 @@ def main():
             # |  1 |  1 |  3  |   |   3 // 2 = 1   |  3 % 2 = 1   |
             # +----+----+-----+   +----------------+--------------+
 
-            s1.value(selector_val // 2)
+            s1.value(selector_val // 2)  # [1]
             s0.value(selector_val % 2)
             sleep(0.02)
 
@@ -126,11 +126,11 @@ def main():
             print(f'selected output: {prev_binary_code}')
         sleep(0.1)
 
-        if len(key_presses) >= PASSCODE_LENGTH:
+        if len(key_presses) >= PASSCODE_LENGTH:  # [2]
             if key_presses[:PASSCODE_LENGTH] == PASS_CODE:
                 print('correct passcode')
                 
-                if binary_code < LED_COUNT:
+                if binary_code < LED_COUNT:  # [3]
                     print(f'toggling: {binary_code}')
                     out_pins[binary_code].toggle()
                 else:
