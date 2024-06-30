@@ -59,7 +59,7 @@ def interrupt_callback(pin):
         last_button_time_stamp = cur_button_ts
         key_presses.append(pin)
 
-        # Display pressed button number
+        # Display pressed button value in the [0, 2] range
         print(f'key press: {pin_id(pin) - BUTTON_START_ID}')
 
 
