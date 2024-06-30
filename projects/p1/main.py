@@ -59,7 +59,7 @@ def interrupt_callback(pin):
         last_button_time_stamp = cur_button_ts
         key_presses.append(pin)
 
-        # Which button has been pressed?
+        # Display pressed button number
         print(f'key press: {pin_id(pin) - BUTTON_START_ID}')
 
 
@@ -137,7 +137,6 @@ def main():
                 else:
                     print(f'invalid output: {binary_code}, ',
                           f'valid range: 0-{len(out_pins) - 1}, doing nothing')
-            
             else:
                 print('wrong passcode', '\n')
 
