@@ -1,7 +1,17 @@
-    # 4-to-1 MUX Chaining Implementation, Building a MUX from Gates, Course 3: Combination Gates and Multiplexers
-    # Implement a Circuit, Breadboarding, Course 4: Connecting and Programming Embedded Systems
-    # Implement Complex Circuit on Breadboard, Course 5: Synchronous and Asynchronous Processing
-    # Add LED Toggle
+"""
+Title: Embedded Input Reader Project, Udacity Embedded Systems Fundamentals Nanodegree
+Author: Federico M. Massari
+Date: 2024-06-30
+
+Resources:
+- [1] Lesson 11: 4-to-1 MUX Chaining Implementation, Building a MUX from Gates, Course 3: Combination Gates and 
+        Multiplexers
+- [2] Lesson 12: Implement a Circuit, Breadboarding, Course 4: Connecting and Programming Embedded Systems
+- [3] Lesson 10: Implement Complex Circuit on Breadboard, Synchronous and Asynchronous Processing, Course 4: 
+        Connecting and Programming Embedded Systems
+- [4] Lesson 12: Add LED ToggleSynchronous and Asynchronous Processing, Course 4: Connecting and Programming 
+        Embedded Systems
+"""
 
 import machine
 import time
@@ -20,15 +30,24 @@ MAX_IDLE_TIME_MS = 3000  # To clear incomplete button sequence after 3 seconds o
 
 
 def pin_id(pin):
+    """Extract pin number from MicroPython's machine.Pin value format.
+
+    :param pin: machine.Pin type parameter
+
+    :return: integer pin id
+    """
     # Example pin value format: Pin(GPIO16, mode=IN, pull=PULL_DOWN)
     return int(str(pin)[8:10].rstrip(","))
 
 
-## Pin interrupt handler
-#
-# A function to handle pin interrupts
-# Expects a machine.Pin type parameter
 def interrupt_callback(pin):
+    """Pin interrupt handler callback function.
+
+    :param pin: machine.Pin type parameter
+
+    Resources:
+    [1] - https://docs.micropython.org/en/latest/library/machine.Pin.html#machine.Pin.irq
+    """
     global last_button_time_stamp
 
     cur_button_ts = time.ticks_ms()
@@ -44,6 +63,8 @@ def interrupt_callback(pin):
 
 
 def clear_key_presses_if_inactive():
+    """Clear sequence of key presses due to inactivity, allowing to input a fresh combination. 
+    """
     global key_presses
     global last_button_time_stamp
 
@@ -84,28 +105,17 @@ def main():
     while True:
         binary_code = 0
         for selector_val in range(INPUT_COUNT):  # Scan each mux
+            # +----+----+-----+   +----------------+--------------+
+            # | S1 | S0 |  D  |   | Floor div (S1) |  Modulo (S0) |
+            # +----+----+-----+   +----------------+--------------+
+            # |  0 |  0 |  0  |   |   0 // 2 = 0   |  0 % 2 = 0   |
+            # |  0 |  1 |  1  |   |   1 // 2 = 0   |  1 % 2 = 1   |
+            # |  1 |  0 |  2  |   |   2 // 2 = 1   |  2 % 2 = 0   |
+            # |  1 |  1 |  3  |   |   3 // 2 = 1   |  3 % 2 = 1   |
+            # +----+----+-----+   +----------------+--------------+
 
-            # +----+----+-----+
-            # | S1 | S0 |  D  |
-            # +----+----+-----+
-            # |  0 |  0 |  0  |
-            # |  0 |  1 |  1  |
-            # |  1 |  0 |  2  |
-            # |  1 |  1 |  3  |
-            # +----+----+-----+
-
-            # +----------------+--------------+
-            # | Floor div (S1) |  Modulo (S0) |
-            # +----------------+--------------+
-            # |   0 // 2 = 0   |  0 % 2 = 0   |
-            # |   1 // 2 = 0   |  1 % 2 = 1   |
-            # |   2 // 2 = 1   |  2 % 2 = 0   |
-            # |   3 // 2 = 1   |  3 % 2 = 1   |
-            # +----------------+--------------+
-
-            s1.value(selector_val // 2)  # TEST IF CORRECT!
+            s1.value(selector_val // 2)
             s0.value(selector_val % 2)
-
             sleep(0.02)
 
             # (2^1 * input_1) + (2^0 * input_0)
@@ -124,8 +134,8 @@ def main():
                     print(f'toggling: {binary_code}')
                     out_pins[binary_code].toggle()
                 else:
-                    print(f'invalid output: {binary_code}, ' + \
-                    f'valid range: 0-{len(out_pins) - 1}, doing nothing')
+                    print(f'invalid output: {binary_code}, ',
+                          f'valid range: 0-{len(out_pins) - 1}, doing nothing')
             
             else:
                 print('wrong passcode')
