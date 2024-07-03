@@ -12,6 +12,8 @@ __Acquired familiarity with:__ Wokwi, MicroPython, Raspberry Pi Pico.
 
 ### Overview
 
+__[Link to Wokwi project](https://wokwi.com/projects/402048833643264001)__ | __[Link to code](./projects/p1/main.py)__
+
 ### Output
 
 ![Embedded Input Reader Output](./projects/p1/img/mov0.gif)
