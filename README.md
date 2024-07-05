@@ -6,7 +6,7 @@
 
 # Core Projects
 
-## [Project: Embedded Input Reader]()
+## [Project: Embedded Input Reader](projects/p1/p1-embedded-input-reader.md)
 
 __Acquired familiarity with:__ Wokwi, MicroPython, Raspberry Pi Pico.
 
