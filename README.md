@@ -12,6 +12,8 @@ __Acquired familiarity with:__ Wokwi, MicroPython, Raspberry Pi Pico.
 
 ### Overview
 
+As the capstone project for the Nanodegree, I built a digital interface leveraging the Raspberry Pi Pico microcontroller to manage the state of LEDs based on input from switches and by entering a passcode.
+
 __[Link to Wokwi project](https://wokwi.com/projects/402048833643264001)__ | __[Link to code](./projects/p1/main.py)__
 
 ### Output
