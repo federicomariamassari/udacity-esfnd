@@ -18,6 +18,6 @@ __[Link to Wokwi project](https://wokwi.com/projects/402048833643264001)__ | __[
 
 ### Output
 
-Users can control the state of the four slide switches located at the top of the interface. Each switch represents a binary digit, and when a switch is activated, the corresponding yellow LED is turned on, to visually indicate its state. The system accepts the three-digit passcode 0-2-1, and the input is processed only when this correct code is entered via the pushbuttons.
+Users can control the state of the four slide switches located at the top of the interface. Each switch represents a binary digit, and when a switch is activated, the corresponding yellow LED is turned on to visually indicate its state. The system accepts the three-digit passcode 0-2-1, and the input is processed only when this correct code is entered via the pushbuttons.
 
 ![Embedded Input Reader Output](./projects/p1/img/mov0.gif)
